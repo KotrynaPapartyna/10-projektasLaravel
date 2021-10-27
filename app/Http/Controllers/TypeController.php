@@ -13,10 +13,21 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $types=Type::sortable()->paginate(5);
-        return view ('type.index', ['types'=> $types]);
+        $collumnName=$request->collumnname;
+        $sortby=$request->sortby;
+
+
+        if (!$collumnName && !$sortby) {
+           $collumnName='id';
+            $sortby='asc';
+        }
+
+        $types=Type::orderBy( $collumnName, $sortby)->paginate(5);
+
+        return view('type.index', ['types'=>$types, 'collumnName'=>$collumnName, 'sortby'=>$sortby]);
+
     }
 
     /**
@@ -42,7 +53,7 @@ class TypeController extends Controller
 
         $type->title=$request->type_title;
         $type->description=$request->type_description;
-        $type->task_id=$request->type_task_id;
+        //$type->task_id=$request->type_task_id;
 
         $type->save();
 
@@ -85,7 +96,7 @@ class TypeController extends Controller
     {
         $type->title=$request->type_title;
         $type->description=$request->type_description;
-        $type->task_id=$request->type_taskid;
+        //$type->task_id=$request->type_taskid;
 
         $type->save();
 
@@ -100,8 +111,21 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        $type->delete();
+        $types_count = $type->taskTypes->count();
 
-        return redirect()->route("type.index")->with('success_message', 'Type was successfully deleted');
+        if($types_count!=0) {
+            return redirect()->route("type.index")->with('error_message','The Company cannot be deleted because he has a type');
+        }
+
+        $type->delete();
+        return redirect()->route("type.index")->with('success_message','The Company was successfully deleted');
     }
+
+    public function search(Request $request) {
+
+        $search=$request->search;
+        $types= Type::query()->sortable()->where('title', 'LIKE', "%{$search}%")->orWhere('description', 'LIKE', "%{$search}%")->paginate(5);
+
+    return view ('type.search', ['types'=>$types]);
+}
 }

@@ -2,6 +2,8 @@
 
 @section('content')
 
+{{--VEIKIA--}}
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -28,9 +30,24 @@
                         </div>
 
                         <div class="form-group row">
+
+                            <label for="type_id" class="col-sm-3 col-form-label">{{ __('Task Type') }}</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="type_id">
+
+                                    @foreach ($types as $type)
+
+                                        <option value="{{$type->id}}" @if($type->id == $task->type_id) selected @endif >{{$type->title}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
                             <label for="logo" class="col-sm-3 col-form-label">{{ __('Task Logo') }}</label>
                         <div class="col-md-6">
-                            <input id="logo" type="file" class="form-control" name="logo" required autofocus>
+                            <input id="logo" type="file" class="form-control" name="logo">
                             </div>
                         </div>
 

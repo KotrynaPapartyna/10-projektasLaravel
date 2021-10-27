@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+{{--VEIKIA--}}
 @section("content")
     <div class="container">
         <div class="row justify-content-center">
@@ -29,9 +30,9 @@
 
                             <div class="form-group row">
 
-                                <label for="task_typeid" class="col-md-4 col-form-label text-md-right">{{ __('Task Type') }}</label>
+                                <label for="type_id" class="col-md-4 col-form-label text-md-right">{{ __('Task Type') }}</label>
                                 <div class="col-md-6">
-                                    <select class="form-control" name="task_typeid">
+                                    <select class="form-control" name="type_id">
 
                                         @foreach ($types as $type)
 

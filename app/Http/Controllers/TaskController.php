@@ -36,10 +36,10 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Task $task)
     {
         $types= Type::all();
-        return view("task.create", ["types" =>$types]);
+        return view("task.create", ["task"=>$task, "types"=>$types]);
     }
 
     /**
@@ -54,21 +54,20 @@ class TaskController extends Controller
 
         $task->title=$request->task_title;
         $task->description=$request->task_description;
-        $task->type_typeid = $request->task_typeid;
-        $task ->logo = $request->task_logo;
+        $task->type_id = $request->type_id;
+
+        if ($request->has('task_logo')) {
+
+            $imageName=time().'.'.$request->logo->extension();
+            $task->logo= '/images/'.$imageName;
+
+            $request->logo->move(public_path('images'), $imageName);
+            } else {
+                $task->logo= '/images/placeholder.png';
+            }
 
 
-        //if ($request->has('logo')) {
-
-            //$imageName=time().'.'.$request->logo->extension();
-            //$task->logo= '/images/'.$imageName;
-
-            //$request->logo->move(public_path('images'), $imageName);
-            //} else {
-                //$task->logo= '/images/placeholder.png';
-            //}
-
-            $task->save();
+        $task->save();
 
             return redirect()->route("task.index");
         }
@@ -81,7 +80,9 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return view("task.show", ["task" => $task]);
+        $types = $task->taskTypes;
+
+        return view("task.show",["task"=>$task, "types"=> $types]);
     }
 
     /**
@@ -92,7 +93,8 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        $types = Type::all();
+        $types = Type::all()->sortBy("id", SORT_REGULAR, true); // cia pakeitus i false- rikiuos atvirksciai
+        // pakeitus i "title" - rikiuos pagal title- pvz abeceles tvarka (desc arba asc)
         return view("task.edit", ["task"=>$task, "types"=>$types]);
 
     }
@@ -108,13 +110,12 @@ class TaskController extends Controller
     {
         $task->title=$request->task_title;
         $task->description=$request->task_description;
-        $task->type_typeid = $request->task_typeid;
+        $task->type_id = $request->type_id;
         $task ->logo = $request->task_logo;
 
             $task->save();
 
             return redirect()->route("task.index");
-
     }
 
     /**
@@ -143,5 +144,10 @@ class TaskController extends Controller
 
         return view ('task.search', ['tasks'=>$tasks]);
     }
-}
 
+    public function filter(Request $request) {
+
+
+    }
+
+}

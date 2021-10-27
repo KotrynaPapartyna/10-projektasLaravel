@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+{{--VEIKIA--}}
+
 @section('content')
     <div class="container">
 
@@ -27,9 +29,9 @@
                 @endforeach
     </table>
 
-    {{-- {{ $companies->links() }} --}}
+    <a class="btn btn-info" href="{{route('type.index') }}">Back To Types List</a>
 
-    {{--itraukt prarastus kintamuosius i companijas}}--}}
+
    {!! $types->appends(Request::except('page'))->render() !!}
 
 </div>

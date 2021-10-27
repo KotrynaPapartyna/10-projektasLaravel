@@ -21,6 +21,7 @@ Route::get('/', function () {
 
         Route::get('','TaskController@index')->name('task.index');//->middleware("auth");
         Route::get('search','TaskController@search')->name('task.search');//->middleware("auth");
+        Route::get('filter','TaskController@filter')->name('task.filter');//->middleware("auth");
         Route::get('create','TaskController@create')->name('task.create');//->middleware("auth");
         Route::post('store','TaskController@store')->name('task.store');//->middleware("auth");
         Route::get('edit/{task}', 'TaskController@edit')->name('task.edit');//->middleware("auth");
@@ -32,6 +33,7 @@ Route::get('/', function () {
     Route::prefix('types')->group(function () {
 
         Route::get('','TypeController@index')->name('type.index');//->middleware("auth");
+        Route::get('search','TypeController@search')->name('type.search');//->middleware("auth");
         Route::get('create','TypeController@create')->name('type.create');//->middleware("auth");
         Route::post('store','TypeController@store')->name('type.store');//->middleware("auth");
         Route::get('edit/{type}', 'TypeController@edit')->name('type.edit');//->middleware("auth");

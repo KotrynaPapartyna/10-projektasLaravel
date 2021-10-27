@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
 
+        {{--VEIKIA--}}
         <form action="{{route("task.search")}}" method="GET">
             @csrf
 
@@ -26,6 +27,8 @@
                     </tr>
                 @endforeach
     </table>
+
+    <a class="btn btn-info" href="{{route('task.index') }}">Back To Tasks List</a>
 
    {!! $tasks->appends(Request::except('page'))->render() !!}
 
