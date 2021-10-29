@@ -68,9 +68,9 @@ class TypeController extends Controller
      */
     public function show(Type $type)
     {
-        $tasks=$type->typeTasks;
+        //$tasks=$type->typeTasks;
         //$tasks_count=$tasks->count();
-        return view ("type.show", ["type"=>$type, "tasks"=>$tasks]);
+        return view ("type.show", ["type"=>$type]);
     }
 
     /**
@@ -96,7 +96,7 @@ class TypeController extends Controller
     {
         $type->title=$request->type_title;
         $type->description=$request->type_description;
-        //$type->task_id=$request->type_taskid;
+        //$type->task_id=$request->type_task_id;
 
         $type->save();
 
@@ -111,14 +111,14 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        $types_count = $type->taskTypes->count();
+        //$types_count = $type->taskTypes->count();
 
-        if($types_count!=0) {
-            return redirect()->route("type.index")->with('error_message','The Company cannot be deleted because he has a type');
-        }
+        //if($types_count!=0) {
+            //return redirect()->route("type.index")->with('error_message','The Company cannot be deleted because he has a type');
+        //}
 
         $type->delete();
-        return redirect()->route("type.index")->with('success_message','The Company was successfully deleted');
+        return redirect()->route("type.index")->with('success_message','The Type was successfully deleted');
     }
 
     public function search(Request $request) {

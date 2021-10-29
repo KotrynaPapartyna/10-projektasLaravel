@@ -4,6 +4,19 @@
 
 <div class="container">
 
+    {{--@if(session()->has('error_message'))
+    <div class="alert alert-danger">
+        {{session()->get("error_message")}}
+    </div>
+    @endif
+    --}}
+
+    @if(session()->has('success_message'))
+    <div class="alert alert-success">
+        {{session()->get("success_message")}}
+    </div>
+    @endif
+
 
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -73,24 +86,6 @@
 
     </form>
 
-    {{--<form action="{{route("task.filter")}}" method="GET">
-        @csrf
-
-    REIKIA SUSITVARKYTI FILTRA
-
-        <label for="task_type_id" class="col-md-4 col-form-label text-md-left">{{ __('Task filter') }}</label>
-            <div class="col-md-4">
-                <select class="form-control" name="task_type_id">
-                    @foreach ($types as $type)
-
-                        <option value="{{$type->id}}" @if($type->id == $task->type_id) selected @endif >{{$type->title}}</option>
-
-                    @endforeach
-                </select>
-            </div>
-    </form>--}}
-
-
     <table class="table table-striped">
 
         <tr>
@@ -100,21 +95,11 @@
                 <th>@sortablelink('title', 'TITLE')</th>
                 <th>@sortablelink('description', 'DESCRIPTION' )</th>
                 <th>@sortablelink('type_id', 'TYPE' )</th>
+                <th>Created Date</th>
+                <th>Updated Date</th>
                 <th>Actions</th>
             </tr>
 
-
-        {{--@if(session()->has('error_message'))
-            <div class="alert alert-danger">
-                {{session()->get("error_message")}}
-            </div>
-        @endif
-            NEVEIKIA- DAR TAISYTI
-        @if(session()->has('success_message'))
-            <div class="alert alert-success">
-                {{session()->get("success_message")}}
-            </div>
-        @endif--}}
 
         @foreach ($tasks as $task)
 
@@ -122,6 +107,9 @@
                 <td> {{$task->title }}</td>
                 <td> {!!$task->description !!}</td>
                 <td> {{$task->taskType->title }}</td>
+                <td> {{$task->created_at }}</td>
+                <td> {{$task->updated_at }}</td>
+
 
 
                     <td>

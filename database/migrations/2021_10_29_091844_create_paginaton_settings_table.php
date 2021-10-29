@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTasksTable extends Migration
+class CreatePaginatonSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,12 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('paginaton_settings', function (Blueprint $table) {
             $table->id();
             $table->string("title");
-            $table->longText("description");
-            $table->unsignedBigInteger("type_id");
-
+            $table->unsignedBigInteger("value");
+            $table->unsignedBigInteger("visible");
             $table->timestamps();
-            $table->string("logo", 200);
-
-            $table->foreign("type_id")->references("id")->on("types");
-
         });
     }
 
@@ -34,6 +29,6 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('paginaton_settings');
     }
 }

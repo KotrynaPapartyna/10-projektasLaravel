@@ -7,9 +7,9 @@ use Kyslik\ColumnSortable\Sortable;
 
 class Type extends Model
 {
-    //public function typeTask () {
-        //return $this->belongsTo(Task::class, 'task_id', 'id');
-    ///}
+    public function typeTasks () {
+        return $this->hasMany(Task::class, 'task_id', 'id');
+    }
 
     use Sortable;
 

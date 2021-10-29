@@ -15,100 +15,102 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
-       DB::table('tasks')->insert([
-            'title'=>'title',
-            'description'=>'description',
-            'type_id'=>rand(1,4),
-            'created_at'=>date('y-m-d'),
-            'updated_at'=>date('y-m-d'),
-            'logo'=>'logo',
-       ]);
+    factory(Task::class, 150)->create();
 
-       DB::table('tasks')->insert([
-            'title'=>'title',
-            'description'=>'description',
-            'type_id'=>rand(1,4),
-            'created_at'=>date('y-m-d'),
-            'updated_at'=>date('y-m-d'),
-            'logo'=>'logo',
+    //    DB::table('tasks')->insert([
+    //         'title'=>'title',
+    //         'description'=>'description',
+    //         'type_id'=>rand(1,4),
+    //         'created_at'=>date('y-m-d'),
+    //         'updated_at'=>date('y-m-d'),
+    //         'logo'=>'logo',
+    //    ]);
 
-        ]);
+    //    DB::table('tasks')->insert([
+    //         'title'=>'title',
+    //         'description'=>'description',
+    //         'type_id'=>rand(1,4),
+    //         'created_at'=>date('y-m-d'),
+    //         'updated_at'=>date('y-m-d'),
+    //         'logo'=>'logo',
 
-        DB::table('tasks')->insert([
-            'title'=>'title',
-            'description'=>'description',
-            'type_id'=>rand(1,4),
-            'created_at'=>date('y-m-d'),
-            'updated_at'=>date('y-m-d'),
-            'logo'=>'logo',
+    //     ]);
 
-        ]);
+    //     DB::table('tasks')->insert([
+    //         'title'=>'title',
+    //         'description'=>'description',
+    //         'type_id'=>rand(1,4),
+    //         'created_at'=>date('y-m-d'),
+    //         'updated_at'=>date('y-m-d'),
+    //         'logo'=>'logo',
 
-        DB::table('tasks')->insert([
-            'title'=>'title',
-            'description'=>'description',
-            'type_id'=>rand(1,4),
-            'created_at'=>date('y-m-d'),
-            'updated_at'=>date('y-m-d'),
-            'logo'=>'logo',
+    //     ]);
 
-        ]);
+    //     DB::table('tasks')->insert([
+    //         'title'=>'title',
+    //         'description'=>'description',
+    //         'type_id'=>rand(1,4),
+    //         'created_at'=>date('y-m-d'),
+    //         'updated_at'=>date('y-m-d'),
+    //         'logo'=>'logo',
 
-        DB::table('tasks')->insert([
-            'title'=>'title',
-            'description'=>'description',
-            'type_id'=>rand(1,4),
-            'created_at'=>date('y-m-d'),
-            'updated_at'=>date('y-m-d'),
-            'logo'=>'logo',
+    //     ]);
 
-        ]);
+    //     DB::table('tasks')->insert([
+    //         'title'=>'title',
+    //         'description'=>'description',
+    //         'type_id'=>rand(1,4),
+    //         'created_at'=>date('y-m-d'),
+    //         'updated_at'=>date('y-m-d'),
+    //         'logo'=>'logo',
 
-        DB::table('tasks')->insert([
-            'title'=>'title',
-            'description'=>'description',
-            'type_id'=>rand(1,4),
-            'created_at'=>date('y-m-d'),
-            'updated_at'=>date('y-m-d'),
-            'logo'=>'logo',
+    //     ]);
 
-        ]);
+    //     DB::table('tasks')->insert([
+    //         'title'=>'title',
+    //         'description'=>'description',
+    //         'type_id'=>rand(1,4),
+    //         'created_at'=>date('y-m-d'),
+    //         'updated_at'=>date('y-m-d'),
+    //         'logo'=>'logo',
 
-        DB::table('tasks')->insert([
-            'title'=>'title',
-            'description'=>'description',
-            'type_id'=>rand(1,4),
-            'created_at'=>date('y-m-d'),
-            'updated_at'=>date('y-m-d'),
-            'logo'=>'logo',
-        ]);
+    //     ]);
 
-        DB::table('tasks')->insert([
-            'title'=>'title',
-            'description'=>'description',
-            'type_id'=>rand(1,4),
-            'created_at'=>date('y-m-d'),
-            'updated_at'=>date('y-m-d'),
-            'logo'=>'logo',
-        ]);
+    //     DB::table('tasks')->insert([
+    //         'title'=>'title',
+    //         'description'=>'description',
+    //         'type_id'=>rand(1,4),
+    //         'created_at'=>date('y-m-d'),
+    //         'updated_at'=>date('y-m-d'),
+    //         'logo'=>'logo',
+    //     ]);
 
-        DB::table('tasks')->insert([
-            'title'=>'title',
-            'description'=>'description',
-            'type_id'=>rand(1,4),
-            'created_at'=>date('y-m-d'),
-            'updated_at'=>date('y-m-d'),
-            'logo'=>'logo',
-        ]);
+    //     DB::table('tasks')->insert([
+    //         'title'=>'title',
+    //         'description'=>'description',
+    //         'type_id'=>rand(1,4),
+    //         'created_at'=>date('y-m-d'),
+    //         'updated_at'=>date('y-m-d'),
+    //         'logo'=>'logo',
+    //     ]);
 
-        DB::table('tasks')->insert([
-            'title'=>'title',
-            'description'=>'description',
-            'type_id'=>rand(1,4),
-            'created_at'=>date('y-m-d'),
-            'updated_at'=>date('y-m-d'),
-            'logo'=>'logo',
-        ]);
+    //     DB::table('tasks')->insert([
+    //         'title'=>'title',
+    //         'description'=>'description',
+    //         'type_id'=>rand(1,4),
+    //         'created_at'=>date('y-m-d'),
+    //         'updated_at'=>date('y-m-d'),
+    //         'logo'=>'logo',
+    //     ]);
 
-    }
+    //     DB::table('tasks')->insert([
+    //         'title'=>'title',
+    //         'description'=>'description',
+    //         'type_id'=>rand(1,4),
+    //         'created_at'=>date('y-m-d'),
+    //         'updated_at'=>date('y-m-d'),
+    //         'logo'=>'logo',
+    //     ]);
+
+     }
 }
