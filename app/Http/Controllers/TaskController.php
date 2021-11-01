@@ -84,7 +84,7 @@ class TaskController extends Controller
             // 'title' => 'required', 'min:6', 'unique:tasks|alpha_num' // skaiciai+tekstas
             // 'title' => 'required', 'min:6', 'unique:tasks|regex:/^[a-zA-Z0-9]+$/u', //0-9,A-Z
 
-            'title' => 'required|min:6|unique:tasks',
+            'task_title' => 'required|min:6|unique:tasks',
                 // 'title' => ['required', 'min:6', 'unique:tasks'],
             //'task_description' => 'required|min:6',
             'task_description' => 'required|min:6|max:50',

@@ -12,6 +12,7 @@ $factory->define(Task::class, function (Faker $faker) {
         'logo'=>$faker->imageUrl(300,300, "animals", true),
         'created_at'=>$faker->date(),
         'updated_at'=>$faker->date(),
-        'type_id'=>rand(1,4)
+        'type_id'=>rand(1,4),
+        'owner_id'=>rand(1,4),
     ];
 });

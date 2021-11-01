@@ -19,8 +19,16 @@ class Task extends Model
     // nurodomi visi stulpeliai kuriuo norima rikiuoti
     public $sortable= ["id", "title", "description", "type_id"];
 
+
+
     public function taskType() {
         return $this->belongsTo(Type::class, "type_id", "id");
+
+    }
+
+    public function taskOwner() {
+        return $this->belongsTo(Owner::class, "owner_id", "id");
+
     }
 
 }

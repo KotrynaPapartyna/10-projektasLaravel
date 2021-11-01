@@ -17,7 +17,7 @@
                 @endif
 
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('TYPES') }}</div>
 
@@ -25,8 +25,24 @@
     <form method="GET" action="{{route('type.create') }}">
 
         @csrf
-        <button class="btn btn-success" type="submit">Create</button>
+        <button class="btn btn-success" type="submit">CREATE NEW TYPE</button>
     </form>
+
+    {{--OWNER MYGTUKAS--}}
+    <form method="GET" action="{{route('owner.index') }}">
+
+        @csrf
+        <button class="btn btn-warning" type="submit">OWNERS</button>
+    </form>
+
+    {{--TASKS MYGTUKAS--}}
+    <form method="GET" action="{{route('task.index') }}">
+
+        @csrf
+        <button class="btn btn-secondary" type="submit">TASKS</button>
+    </form>
+
+
 
     {{--PAIESKOS FORMA--}}
     <form action="{{route("type.search")}}" method="GET">
@@ -85,42 +101,36 @@
 
     </form>
 
-    <table class="table table-striped">
+    <table class="table table-striped table-hover table-sm">
 
-        <tr>
+        <tr class="table-dark">
             <th>ID</th>
             <th>Title</th>
             <th>Description</th>
             <th>Actions</th>
-
         </tr>
 
 
                     @foreach ($types as $type)
 
-
                     <td>{{$type->id}}</td>
                     <td>{{$type->title}}</td>
                     <td>{!!$type->description!!}</td>
 
-
                     <td>
-
                         <a class="btn btn-warning" href="{{route('type.show', [$type]) }}">Show</a>
                         <a class="btn btn-info" href="{{route('type.edit', [$type]) }}">Edit</a>
 
                         <form method="POST" action="{{route('type.destroy', [$type]) }}">
-
                         @csrf
                         <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
-
 
                     </td>
             </tr>
 
         @endforeach
-                </table>
+    </table>
 
                 {!! $types->appends(Request::except('page'))->render() !!}
 

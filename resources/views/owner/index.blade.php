@@ -4,8 +4,6 @@
 
 <div class="container">
 
-
-
     {{--@if(session()->has('error_message'))
     <div class="alert alert-danger">
         {{session()->get("error_message")}}
@@ -23,47 +21,46 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('TASKS') }}</div>
+                <div class="card-header">{{ __('OWNERS') }}</div>
 
     {{--SUKURIMO MYGTUKAS--}}
-
-    <form method="GET" action="{{route('task.create') }}">
-
-        @csrf
-        <button class="btn btn-primary" type="submit">CREATE NEW TASK</button>
-    </form>
-
-    {{--OWNER MYGTUKAS--}}
-    <form method="GET" action="{{route('owner.index') }}">
+    <form method="GET" action="{{route('owner.create') }}">
 
         @csrf
-        <button class="btn btn-warning" type="submit">OWNERS</button>
+        <button class="btn btn-success" type="submit">CREATE NEW OWNER</button>
     </form>
 
-    {{--TYPES MYGTUKAS--}}
+    {{--TYPE MYGTUKAS--}}
     <form method="GET" action="{{route('type.index') }}">
 
         @csrf
-        <button class="btn btn-secondary" type="submit">TYPES</button>
+        <button class="btn btn-warning" type="submit">TYPES</button>
     </form>
 
-    {{--PAIESKOS FORMA--}}
-    <form action="{{route("task.search")}}" method="GET">
+    {{--TASKS MYGTUKAS--}}
+    <form method="GET" action="{{route('task.index') }}">
+
+        @csrf
+        <button class="btn btn-secondary" type="submit">TASKS</button>
+    </form>
+
+    {{--PAIESKOS FORMA
+    <form action="{{route("owner.search")}}" method="GET">
         @csrf
 
         <input type="text" name="search" placeholder="Enter searc key"/>
         <button type="submit">search</button>
-    </form>
+    </form>--}}
 
-    {{--RIKIAVIMO FORMA--}}
-    <form action="{{route('task.index')}}" method="GET">
+    {{--RIKIAVIMO FORMA
+    <form action="{{route('owner.index')}}" method="GET">
         @csrf
         <select name="collumnname">
 
-            {{--jeigu gautas kintamasis yra id- jis turi buti pazymetas--}}
+            jeigu gautas kintamasis yra id- jis turi buti pazymetas
             @if ($collumnName == 'id')
                 <option value="id" selected>ID</option>
-                {{--kitu atveju- jis nera pazymetas--}}
+                kitu atveju- jis nera pazymetas
                 @else
                 <option value="id">ID</option>
             @endif
@@ -87,8 +84,6 @@
                 <option value="type_id">Type</option>
             @endif
 
-
-
         </select>
 
         <select name="sortby">
@@ -103,44 +98,40 @@
 
         <button type="submit">SORT</button>
 
-    </form>
+    </form>--}}
 
     <table class="table table-striped table-hover table-sm">
+
         <tr>
 
-            <tr class="table-secondary">>
+            <tr class="table-dark">
                 <th>@sortablelink('id', 'ID')</th>
-                <th>@sortablelink('title', 'TITLE')</th>
-                <th>@sortablelink('description', 'DESCRIPTION' )</th>
-                <th>@sortablelink('type_id', 'TYPE' )</th>
-                <th>@sortablelink('name', 'Owner Name' )</th>
-                <th>@sortablelink('surname', 'Owner Surname' )</th>
-                <th>@sortablelink('created_at', 'Created Date')</th>
-                <th>@sortablelink('updated_at', 'Updated Date')</th>
+                <th>@sortablelink('name', 'Name')</th>
+                <th>@sortablelink('surname', 'Surname' )</th>
+                <th>@sortablelink('email', 'E-mail' )</th>
+                <th>@sortablelink('phone', 'Phone Number' )</th>
+                <th>Created Date</th>
+                <th>Updated Date</th>
                 <th>Actions</th>
             </tr>
 
 
-        @foreach ($tasks as $task)
+        @foreach ($owners as $owner)
 
-                <td> {{$task->id }}</td>
-                <td> {{$task->title }}</td>
-                <td> {!!$task->description !!}</td>
-                <td> {{$task->taskType->title }}</td>
-                {{--du Title pakeisyi i owner name ir surname --}}
-                <td> {{$task->taskOwner->name }}</td>
-                <td> {{$task->taskOwner->surname }}</td>
-                <td> {{$task->created_at }}</td>
-                <td> {{$task->updated_at }}</td>
-
-
+                <td> {{$owner->id }}</td>
+                <td> {{$owner->name }}</td>
+                <td> {{$owner->surname}}</td>
+                <td> {{$owner->email }}</td>
+                <td> {{$owner->phone}}</td>
+                <td> {{$owner->created_at }}</td>
+                <td> {{$owner->updated_at }}</td>
 
                     <td>
 
-                        <a class="btn btn-warning" href="{{route('task.show', [$task]) }}">Show</a>
-                        <a class="btn btn-info" href="{{route('task.edit', [$task]) }}">Edit</a>
+                        <a class="btn btn-warning" href="{{route('owner.show', [$owner]) }}">Show</a>
+                        <a class="btn btn-info" href="{{route('owner.edit', [$owner]) }}">Edit</a>
 
-                        <form method="POST" action="{{route('task.destroy', [$task]) }}">
+                        <form method="POST" action="{{route('owner.destroy', [$owner]) }}">
 
                         @csrf
                         <button class="btn btn-danger" type="submit">Delete</button>
@@ -152,7 +143,7 @@
         @endforeach
 
                 </table>
-                {!! $tasks->appends(Request::except('page'))->render() !!}
+                {{--{!! $tasks->appends(Request::except('page'))->render() !!}--}}
             </div>
         </div>
     </div>
