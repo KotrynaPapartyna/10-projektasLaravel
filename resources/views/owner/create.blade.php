@@ -8,14 +8,12 @@
 
 
     @if ($errors->any())
-    {{-- klaidu bus daugau nei 1 --}}
-
         @foreach ($errors->all() as $error)
-        <div class="alert alert-danger">
-            <ul>
-                <li>{{$error}}</li>
-            </ul>
-        </div>
+            <div class="alert alert-danger">
+                <ul>
+                    <li>{{$error}}</li>
+                </ul>
+            </div>
         @endforeach
     @endif
 
@@ -36,9 +34,9 @@
                             <div class="col-md-6">
                                 <input id="name"type="text" class="form-control @error('name') is-invalid @enderror " value="{{ old('name') }}" name="name" autofocus>
                                 @error('name')
-                                <span role="alert" class="invalid-feedback">
-                                    <strong>*{{$message}}</strong>
-                                </span>
+                                    <span role="alert" class="invalid-feedback">
+                                        <strong>*{{$message}}</strong>
+                                    </span>
                                 @enderror
                             </div>
                         </div>
@@ -49,9 +47,9 @@
                             <div class="col-md-6">
                                 <input id="surname"type="text" class="form-control @error('surname') is-invalid @enderror " value="{{ old('surname') }}" name="surname" autofocus>
                                 @error('surname')
-                                <span role="alert" class="invalid-feedback">
-                                    <strong>*{{$message}}</strong>
-                                </span>
+                                    <span role="alert" class="invalid-feedback">
+                                        <strong>*{{$message}}</strong>
+                                    </span>
                                 @enderror
                             </div>
                         </div>
@@ -62,9 +60,9 @@
                             <div class="col-md-6">
                                 <input id="email"type="text" class="form-control @error('email') is-invalid @enderror " value="{{ old('email') }}" name="email" autofocus>
                                 @error('email')
-                                <span role="alert" class="invalid-feedback">
-                                    <strong>*{{$message}}</strong>
-                                </span>
+                                    <span role="alert" class="invalid-feedback">
+                                        <strong>*{{$message}}</strong>
+                                    </span>
                                 @enderror
                             </div>
                         </div>

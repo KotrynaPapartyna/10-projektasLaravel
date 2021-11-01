@@ -24,7 +24,7 @@ class TypeController extends Controller
             $sortby='asc';
         }
 
-        $types=Type::orderBy( $collumnName, $sortby)->paginate(5);
+        $types=Type::orderBy( $collumnName, $sortby)->paginate(2);
 
         return view('type.index', ['types'=>$types, 'collumnName'=>$collumnName, 'sortby'=>$sortby]);
 
@@ -49,10 +49,21 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
+
+        $tasks=Task::all();
+        $task_count=$tasks->count();
+
         $type=new Type;
 
+        $validateVar = $request->validate([
+
+            'title' => 'required|min:6|max:225|alpha',
+            'description' => 'required|min:6|max:1500',
+
+            ]);
+
         $type->title=$request->type_title;
-        $type->description=$request->type_description;
+        $type->description=$request->description;
         //$type->task_id=$request->type_task_id;
 
         $type->save();
@@ -94,8 +105,17 @@ class TypeController extends Controller
      */
     public function update(Request $request, Type $type)
     {
+
+        $validateVar = $request->validate([
+
+            'title' => 'required|min:6|max:225|alpha',
+            'description' => 'required|min:6|max:1500',
+
+            ]);
+
+
         $type->title=$request->type_title;
-        $type->description=$request->type_description;
+        $type->description=$request->description;
         //$type->task_id=$request->type_task_id;
 
         $type->save();

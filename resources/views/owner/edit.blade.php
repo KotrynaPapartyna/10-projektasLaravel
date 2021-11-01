@@ -31,28 +31,48 @@
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Owner Name') }}</label>
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{$owner->name}}" required autofocus>
+                                    <input id="name"type="text" class="form-control @error('name') is-invalid @enderror " value="{{ old('name') }}" name="name" autofocus>
+                                    @error('name')
+                                        <span role="alert" class="invalid-feedback">
+                                            <strong>*{{$message}}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Owner Surname') }}</label>
                                 <div class="col-md-6">
-                                    <input id="surname" type="text" class="form-control" name="surname" value="{{$owner->surname}}" required autofocus>
+                                    <input id="surname"type="text" class="form-control @error('surname') is-invalid @enderror " value="{{ old('surname') }}" name="surname" autofocus>
+                                    @error('surname')
+                                        <span role="alert" class="invalid-feedback">
+                                            <strong>*{{$message}}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Owner Email') }}</label>
                                 <div class="col-md-6">
-                                    <input id="email" type="text" class="form-control" name="email" value="{{$owner->email}}" required autofocus>
+                                    <input id="email"type="text" class="form-control @error('email') is-invalid @enderror " value="{{ old('email') }}" name="email" autofocus>
+                                        @error('email')
+                                            <span role="alert" class="invalid-feedback">
+                                                <strong>*{{$message}}</strong>
+                                            </span>
+                                        @enderror
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Owner Phone') }}</label>
                                 <div class="col-md-6">
-                                    <input id="phone" type="text" class="form-control" name="phone" value="{{$owner->phone}}" required autofocus>
+                                    <input id="phone"type="text" class="form-control @error('phone') is-invalid @enderror " value="{{ old('phone') }}" name="phone" autofocus>
+                                        @error('phone')
+                                            <span role="alert" class="invalid-feedback">
+                                                <strong>*{{$message}}</strong>
+                                            </span>
+                                        @enderror
                                 </div>
                             </div>
 

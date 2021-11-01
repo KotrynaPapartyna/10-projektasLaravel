@@ -23,28 +23,36 @@
             <div class="card">
                 <div class="card-header">{{ __('OWNERS') }}</div>
 
-    {{--SUKURIMO MYGTUKAS--}}
-    <form method="GET" action="{{route('owner.create') }}">
+    {{--MYGTUKU LAUKAS--}}
+    <table>
+        <tr>
+        {{--SUKURIMO MYGTUKAS--}}
+            <th>
+                <form method="GET" action="{{route('owner.create') }}">
+                    @csrf
+                    <button class="btn btn-success" type="submit">CREATE NEW OWNER</button>
+                </form>
+            </th>
 
-        @csrf
-        <button class="btn btn-success" type="submit">CREATE NEW OWNER</button>
-    </form>
 
-    {{--TYPE MYGTUKAS--}}
-    <form method="GET" action="{{route('type.index') }}">
+        {{--TYPE MYGTUKAS--}}
+            <th>
+                <form method="GET" action="{{route('type.index') }}">
+                    @csrf
+                    <button class="btn btn-warning" type="submit">ALL TYPES LIST</button>
+                </form>
+            </th>
 
-        @csrf
-        <button class="btn btn-warning" type="submit">TYPES</button>
-    </form>
-
-    {{--TASKS MYGTUKAS--}}
-    <form method="GET" action="{{route('task.index') }}">
-
-        @csrf
-        <button class="btn btn-secondary" type="submit">TASKS</button>
-    </form>
-
-    {{--PAIESKOS FORMA
+        {{--TASKS MYGTUKAS--}}
+            <th>
+                <form method="GET" action="{{route('task.index') }}">
+                    @csrf
+                    <button class="btn btn-secondary" type="submit">ALL TASKS LIST</button>
+                </form>
+            </th>
+        </tr>
+    </table>
+    {{--PAIESKOS FORMA- kol kas nereikalinga
     <form action="{{route("owner.search")}}" method="GET">
         @csrf
 
@@ -52,36 +60,42 @@
         <button type="submit">search</button>
     </form>--}}
 
-    {{--RIKIAVIMO FORMA
+    {{--RIKIAVIMO FORMA--}}
     <form action="{{route('owner.index')}}" method="GET">
         @csrf
         <select name="collumnname">
 
-            jeigu gautas kintamasis yra id- jis turi buti pazymetas
+            {{--jeigu gautas kintamasis yra id- jis turi buti pazymetas--}}
             @if ($collumnName == 'id')
                 <option value="id" selected>ID</option>
-                kitu atveju- jis nera pazymetas
+                {{--kitu atveju- jis nera pazymetas--}}
                 @else
-                <option value="id">ID</option>
+                    <option value="id">ID</option>
             @endif
 
 
-            @if ($collumnName == 'title')
-             <option value="title" selected>Title</option>
+            @if ($collumnName == 'name')
+             <option value="name" selected>Name</option>
             @else
-                <option value="title">Title</option>
+                <option value="name">Name</option>
             @endif
 
-            @if ($collumnName == 'description')
-                <option value="description" selected>Description</option>
+            @if ($collumnName == 'surname')
+                <option value="surname" selected>Surname</option>
             @else
-                <option value="description">Description</option>
+                <option value="surname">Surname</option>
             @endif
 
-            @if ($collumnName == 'type_id')
-                <option value="type_id" selected>Type</option>
+            @if ($collumnName == 'email')
+                <option value="email" selected>Email</option>
             @else
-                <option value="type_id">Type</option>
+                <option value="email">Email</option>
+            @endif
+
+            @if ($collumnName == 'phone')
+                <option value="phone" selected>Phone</option>
+            @else
+                <option value="phone">Phone</option>
             @endif
 
         </select>
@@ -98,7 +112,7 @@
 
         <button type="submit">SORT</button>
 
-    </form>--}}
+    </form>
 
     <table class="table table-striped table-hover table-sm">
 
@@ -112,7 +126,7 @@
                 <th>@sortablelink('phone', 'Phone Number' )</th>
                 <th>Created Date</th>
                 <th>Updated Date</th>
-                <th>Actions</th>
+
             </tr>
 
 
@@ -127,23 +141,21 @@
                 <td> {{$owner->updated_at }}</td>
 
                     <td>
-
-                        <a class="btn btn-warning" href="{{route('owner.show', [$owner]) }}">Show</a>
-                        <a class="btn btn-info" href="{{route('owner.edit', [$owner]) }}">Edit</a>
-
+                        <th><a class="btn btn-warning" href="{{route('owner.show', [$owner]) }}">Show</a></th>
+                        <th><a class="btn btn-info" href="{{route('owner.edit', [$owner]) }}">Edit</a></th>
+                        <th>
                         <form method="POST" action="{{route('owner.destroy', [$owner]) }}">
-
-                        @csrf
-                        <button class="btn btn-danger" type="submit">Delete</button>
-                    </form>
-
+                            @csrf
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                        </th>
                     </td>
         </tr>
 
         @endforeach
 
                 </table>
-                {{--{!! $tasks->appends(Request::except('page'))->render() !!}--}}
+                {!! $owners->appends(Request::except('page'))->render() !!}
             </div>
         </div>
     </div>

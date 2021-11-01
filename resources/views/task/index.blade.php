@@ -24,36 +24,44 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('TASKS') }}</div>
+    {{--MYGTUKU LAUKAS--}}
+    <table>
+        <tr>
+        {{--SUKURIMO MYGTUKAS--}}
+            <th>
+                <form method="GET" action="{{route('task.create') }}">
+                    @csrf
+                    <button class="btn btn-primary" type="submit">CREATE NEW TASK</button>
+                </form>
+            </th>
 
-    {{--SUKURIMO MYGTUKAS--}}
 
-    <form method="GET" action="{{route('task.create') }}">
+        {{--OWNER MYGTUKAS--}}
+            <th>
+                <form method="GET" action="{{route('owner.index') }}">
+                    @csrf
+                    <button class="btn btn-warning" type="submit">ALL OWNERS LIST</button>
+                </form>
+            </th>
 
-        @csrf
-        <button class="btn btn-primary" type="submit">CREATE NEW TASK</button>
-    </form>
+        {{--TYPES MYGTUKAS--}}
+            <th>
+                <form method="GET" action="{{route('type.index') }}">
+                    @csrf
+                    <button class="btn btn-secondary" type="submit">ALL TYPES LIST</button>
+                </form>
+            </th>
 
-    {{--OWNER MYGTUKAS--}}
-    <form method="GET" action="{{route('owner.index') }}">
-
-        @csrf
-        <button class="btn btn-warning" type="submit">OWNERS</button>
-    </form>
-
-    {{--TYPES MYGTUKAS--}}
-    <form method="GET" action="{{route('type.index') }}">
-
-        @csrf
-        <button class="btn btn-secondary" type="submit">TYPES</button>
-    </form>
-
-    {{--PAIESKOS FORMA--}}
-    <form action="{{route("task.search")}}" method="GET">
-        @csrf
-
-        <input type="text" name="search" placeholder="Enter searc key"/>
-        <button type="submit">search</button>
-    </form>
+        {{--PAIESKOS FORMA--}}
+            <th>
+                <form action="{{route("task.search")}}" method="GET">
+                    @csrf
+                    <input type="text" name="search" placeholder="Enter searc key"/>
+                    <button type="submit">SEARCH</button>
+                </form>
+            </th>
+        </tr>
+    </table>
 
     {{--RIKIAVIMO FORMA--}}
     <form action="{{route('task.index')}}" method="GET">
@@ -86,9 +94,6 @@
             @else
                 <option value="type_id">Type</option>
             @endif
-
-
-
         </select>
 
         <select name="sortby">
@@ -108,7 +113,7 @@
     <table class="table table-striped table-hover table-sm">
         <tr>
 
-            <tr class="table-secondary">>
+            <tr class="table-secondary">
                 <th>@sortablelink('id', 'ID')</th>
                 <th>@sortablelink('title', 'TITLE')</th>
                 <th>@sortablelink('description', 'DESCRIPTION' )</th>
@@ -117,7 +122,7 @@
                 <th>@sortablelink('surname', 'Owner Surname' )</th>
                 <th>@sortablelink('created_at', 'Created Date')</th>
                 <th>@sortablelink('updated_at', 'Updated Date')</th>
-                <th>Actions</th>
+
             </tr>
 
 
@@ -127,24 +132,22 @@
                 <td> {{$task->title }}</td>
                 <td> {!!$task->description !!}</td>
                 <td> {{$task->taskType->title }}</td>
-                {{--du Title pakeisyi i owner name ir surname --}}
                 <td> {{$task->taskOwner->name }}</td>
                 <td> {{$task->taskOwner->surname }}</td>
                 <td> {{$task->created_at }}</td>
                 <td> {{$task->updated_at }}</td>
 
 
-
                     <td>
+                        <th><a class="btn btn-warning" href="{{route('task.show', [$task]) }}">Show</a></th>
+                        <th><a class="btn btn-info" href="{{route('task.edit', [$task]) }}">Edit</a></th>
 
-                        <a class="btn btn-warning" href="{{route('task.show', [$task]) }}">Show</a>
-                        <a class="btn btn-info" href="{{route('task.edit', [$task]) }}">Edit</a>
-
+                        <th>
                         <form method="POST" action="{{route('task.destroy', [$task]) }}">
-
-                        @csrf
-                        <button class="btn btn-danger" type="submit">Delete</button>
-                    </form>
+                            @csrf
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                        </th>
 
                     </td>
         </tr>

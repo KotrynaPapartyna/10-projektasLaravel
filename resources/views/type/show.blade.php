@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="type_description" class="col-sm-3 col-form-label" >{{ __('Type description') }}</label>
+                        <label for="description" class="col-sm-3 col-form-label" >{{ __('Type description') }}</label>
                         <div class="col-md-6">
                             <p>{{$type->description}}</p>
                         </div>

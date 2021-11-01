@@ -12,10 +12,20 @@ class OwnerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $owners = Owner::all();
-        return view("owner.index", ["owners" => $owners]);
+        $collumnName=$request->collumnname;
+        $sortby=$request->sortby;
+
+
+        if (!$collumnName && !$sortby) {
+           $collumnName='id';
+            $sortby='asc';
+        }
+
+        $owners=Owner::orderBy( $collumnName, $sortby)->paginate(5);
+
+        return view('owner.index', ['owners'=>$owners, 'collumnName'=>$collumnName, 'sortby'=>$sortby]);
     }
 
     /**
@@ -38,6 +48,18 @@ class OwnerController extends Controller
     public function store(Request $request)
     {
         $owner = new Owner;
+
+        $validateVar = $request->validate([
+
+            'name' => 'required|min:2|max:15|alpha',
+            'surname' => 'required|min:2|max:15|alpha',
+            'email' => 'required|email:rfc,dns',
+            //'email' => 'required|email|unique:customers,email_address',
+            //'phone'=>'required',
+            'phone'=>'required|regex:/^(\+\d{1,3}[- ]?)?\d{9}$/',
+            //'phone'=>'required|regex:(86|\+3706) \d{3} \d{4}|max:9',
+        ]);
+
         //duomenu bazes lenteles pavadinimas = input/select/texarea laukeliu pavadinimas
         $owner->name = $request->name;
         $owner->surname = $request->surname;
@@ -81,6 +103,19 @@ class OwnerController extends Controller
      */
     public function update(Request $request, Owner $owner)
     {
+
+        $validateVar = $request->validate([
+
+            'name' => 'required|min:2|max:15|alpha',
+            'surname' => 'required|min:2|max:15|alpha',
+            'email' => 'required|email:rfc,dns',
+            //'email' => 'required|email|unique:customers,email_address',
+            'phone'=>'required|regex:/^(\+\d{1,3}[- ]?)?\d{9}$/',
+            //'phone'=> '(86|\+3706) \d{3} \d{4}',
+            //'phone'=>'required|regex:(86|\+3706) \d{3} \d{4}|max:9',
+        ]);
+
+
         $owner->name = $request->name;
         $owner->surname = $request->surname;
         $owner->email = $request->email;

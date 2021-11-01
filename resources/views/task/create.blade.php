@@ -57,9 +57,9 @@
                     <form method="POST" action="{{route('task.store')}}" enctype="multipart/form-data">
 
                         <div class="form-group row">
-                            <label for="task_title" class="col-sm-3 col-form-label" >{{ __('Task Title') }}</label>
+                            <label for="title" class="col-sm-3 col-form-label" >{{ __('Task Title') }}</label>
                             <div class="col-md-6">
-                                <input id="task_title"type="text" class="form-control @error('title') is-invalid @enderror " value="{{ old('title') }}" name="title" autofocus>
+                                <input id="title"type="text" class="form-control @error('title') is-invalid @enderror " value="{{ old('title') }}" name="title" autofocus>
                                 @error('title')
                                 <span role="alert" class="invalid-feedback">
                                     <strong>*{{$message}}</strong>
@@ -69,13 +69,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="task_description" class="col-sm-3 col-form-label">{!!'Task description'!!}</label>
+                            <label for="description" class="col-sm-3 col-form-label">{!!'Task description'!!}</label>
 
                             <div class="col-md-6">
-                                <textarea class="form- control summernote" name="task_description" required>
+                                <textarea class="form- control summernote" name="description" required>
 
                                 </textarea>
-                                        @error('task_description')
+                                        @error('description')
                                         <span role="alert" class="invalid-feedback">
                                             <strong>*{{$message}}</strong>
                                         </span>
@@ -92,6 +92,18 @@
                                     @foreach ($types as $type)
 
                                         <option value="{{$type->id}}" @if($type->id == $task->type_id) selected @endif >{{$type->title}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="owner_id" class="col-sm-3 col-form-label">{{ __('Task Owner') }}</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="owner_id">
+
+                                    @foreach ($owners as $owner)
+                                        <option value="{{$owner->id}}" @if($owner->id == $task->owner_id) selected @endif >{{$owner->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
