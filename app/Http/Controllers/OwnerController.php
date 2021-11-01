@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Owner;
 use Illuminate\Http\Request;
 
+use PDF;
+
 class OwnerController extends Controller
 {
     /**
@@ -137,4 +139,34 @@ class OwnerController extends Controller
         $owner->delete();
         return redirect()->route("owner.index")->with('success_message', 'The owner was successfully deleted');
     }
+
+
+    // vienos Owner PDF generavimas
+    public function generateOwnerPDF(Owner $owner) {
+
+        view()->share('owner', $owner);
+
+        //sukuria vaizda PFD faile- atvaizduoja
+        $pdf = PDF::loadView("pdf_owner_template", $owner);
+
+        return $pdf->download("owner".$owner->id.".pdf");
+
+    }
+
+    // visu Task PDF generavimas
+    public function generatePDF() {
+
+
+        $owners = Owner::all();
+
+        view()->share('owners', $owners);
+
+        $pdf = PDF::loadView("pdf_templateO", $owners);
+
+        // galima pervadinti failo pavadinimus
+        return $pdf->download("owners.pdf");
+
+    }
+
+
 }

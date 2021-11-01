@@ -47,7 +47,7 @@
                         </div>
                     </div>
 
-
+                    <a href="{{route('owner.pdfowner', [$owner])}}" class="btn btn-primary">Export Owner to PDF</a>
                     <a class="btn btn-info" href="{{route('owner.index') }}">Back To Owners List</a>
 
                 </div>

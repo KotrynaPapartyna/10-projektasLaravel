@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Type;
 use App\Task;
+
 use Illuminate\Http\Request;
+
+use PDF;
 
 class TypeController extends Controller
 {
@@ -148,4 +151,34 @@ class TypeController extends Controller
 
     return view ('type.search', ['types'=>$types]);
 }
+
+    // PDF failu generavimo funkcijos- visu tipu
+    public function generateTypePDF(Type $type) {
+
+        view()->share('type', $type);
+
+        //sukuria vaizda PFD faile- atvaizduoja
+        $pdf = PDF::loadView("pdf_type_template", $type);
+
+        return $pdf->download("type".$type->id.".pdf");
+
+    }
+
+    // visu Tipu PDF generavimas
+    public function generatePDF() {
+
+
+        $types = Type::all();
+
+        view()->share('types', $types);
+
+        $pdf = PDF::loadView("pdf_templateY", $types);
+
+        // galima pervadinti failo pavadinimus
+        return $pdf->download("types.pdf");
+
+    }
+
+
+
 }

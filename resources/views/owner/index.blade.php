@@ -154,6 +154,7 @@
 
         @endforeach
 
+            <a class="btn btn-success" href="{{route('owner.pdf')}}"> Export All Owners List to PDF </a>
                 </table>
                 {!! $owners->appends(Request::except('page'))->render() !!}
             </div>

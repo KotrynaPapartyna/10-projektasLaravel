@@ -132,6 +132,8 @@
 
             </tr>
         @endforeach
+
+                <a class="btn btn-success" href="{{route('type.pdf')}}"> Export All Types List to PDF </a>
     </table>
 
                 {!! $types->appends(Request::except('page'))->render() !!}

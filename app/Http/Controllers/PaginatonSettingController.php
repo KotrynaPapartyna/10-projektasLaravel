@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\PaginatonSetting;
 use Illuminate\Http\Request;
 
+use PDF;
+
 class PaginatonSettingController extends Controller
 {
     /**

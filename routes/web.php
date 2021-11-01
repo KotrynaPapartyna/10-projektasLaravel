@@ -28,6 +28,8 @@ Route::get('/', function () {
         Route::post('update/{task}','TaskController@update')->name('task.update')->middleware("auth");
         Route::post('delete/{task}','TaskController@destroy')->name('task.destroy')->middleware("auth");
         Route::get('show/{task}','TaskController@show')->name('task.show')->middleware("auth");
+        Route::get('/pdf', 'TaskController@generatePDF')->name('task.pdf');
+        Route::get('pdfTask/{task}', 'TaskController@generateTaskPDF')->name('task.pdftask');
         });
 
     Route::prefix('types')->group(function () {
@@ -40,6 +42,8 @@ Route::get('/', function () {
         Route::post('update/{type}','TypeController@update')->name('type.update')->middleware("auth");
         Route::post('delete/{type}','TypeController@destroy')->name('type.destroy')->middleware("auth");
         Route::get('show/{type}','TypeController@show')->name('type.show')->middleware("auth");
+        Route::get('/pdf', 'TypeController@generatePDF')->name('type.pdf');
+        Route::get('pdfType/{type}', 'TypeController@generateTypePDF')->name('type.pdftype');
         });
 
     Route::prefix('owners')->group(function () {
@@ -52,7 +56,11 @@ Route::get('/', function () {
         Route::post('update/{owner}','OwnerController@update')->name('owner.update')->middleware("auth");
         Route::post('delete/{owner}','OwnerController@destroy')->name('owner.destroy')->middleware("auth");
         Route::get('show/{owner}','OwnerController@show')->name('owner.show')->middleware("auth");
-        });
+        Route::get('/pdf', 'OwnerController@generatePDF')->name('owner.pdf');
+        Route::get('pdfOwner/{owner}', 'OwnerController@generateOwnerPDF')->name('owner.pdfowner');
+
+
+    });
 
     Route::prefix('paginaton_settings')->group(function () {
 
@@ -64,6 +72,9 @@ Route::get('/', function () {
         Route::post('update/{paginaton_setting}','PaginatonSettingController@update')->name('paginaton_setting.update')->middleware("auth");
         Route::post('delete/{paginaton_setting}','PaginatonSettingController@destroy')->name('paginaton_setting.destroy')->middleware("auth");
         Route::get('show/{paginaton_setting}','PaginatonSettingController@show')->name('paginaton_setting.show')->middleware("auth");
+
+
+
             });
 
         Auth::routes();

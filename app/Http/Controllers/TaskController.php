@@ -6,6 +6,8 @@ use App\Task;
 use App\Type;
 use App\Owner;
 
+use PDF;
+
 
 use Illuminate\Http\Request;
 
@@ -180,8 +182,30 @@ class TaskController extends Controller
         return view ('task.search', ['tasks'=>$tasks]);
     }
 
-    public function filter(Request $request) {
+    // vienos Task PDF generavimas
+    public function generateTaskPDF(Task $task) {
 
+        view()->share('task', $task);
+
+        //sukuria vaizda PFD faile- atvaizduoja
+        $pdf = PDF::loadView("pdf_task_template", $task);
+
+        return $pdf->download("task".$task->id.".pdf");
+
+    }
+
+    // visu Task PDF generavimas
+    public function generatePDF() {
+
+
+        $tasks = Task::all();
+
+        view()->share('tasks', $tasks);
+
+        $pdf = PDF::loadView("pdf_templateT", $tasks);
+
+        // galima pervadinti failo pavadinimus
+        return $pdf->download("tasks.pdf");
 
     }
 

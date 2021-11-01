@@ -56,6 +56,8 @@
                     </div>
 
 
+                    <a href="{{route('task.pdftask', [$task])}}" class="btn btn-primary">Export Task to PDF</a>
+
                     <a class="btn btn-info" href="{{route('task.index') }}">Back To Tasks List</a>
 
                 </div>

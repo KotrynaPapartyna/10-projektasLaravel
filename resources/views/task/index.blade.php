@@ -154,7 +154,11 @@
 
         @endforeach
 
-                </table>
+                <a class="btn btn-success" href="{{route('task.pdf')}}"> Export All Tasks List to PDF </a>
+            </table>
+
+
+
                 {!! $tasks->appends(Request::except('page'))->render() !!}
             </div>
         </div>

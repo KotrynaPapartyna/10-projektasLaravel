@@ -32,7 +32,7 @@
                         </div>
                     </div>
 
-
+                    <a href="{{route('type.pdftype', [$type])}}" class="btn btn-primary">Export Type to PDF</a>
                     <a class="btn btn-info" href="{{route('type.index') }}">Back To Types List</a>
 
                 </div>
