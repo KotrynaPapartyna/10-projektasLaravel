@@ -141,8 +141,8 @@
                 <td> {{$owner->updated_at }}</td>
 
                     <td>
-                        <th><a class="btn btn-warning" href="{{route('owner.show', [$owner]) }}">Show</a></th>
-                        <th><a class="btn btn-info" href="{{route('owner.edit', [$owner]) }}">Edit</a></th>
+                        <span><a class="btn btn-warning" href="{{route('owner.show', [$owner]) }}">Show</a></span>
+                        <span><a class="btn btn-info" href="{{route('owner.edit', [$owner]) }}">Edit</a></span>
                         <th>
                         <form method="POST" action="{{route('owner.destroy', [$owner]) }}">
                             @csrf
