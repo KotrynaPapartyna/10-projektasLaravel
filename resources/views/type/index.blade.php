@@ -33,6 +33,11 @@
             </form>
         </th>
 
+        {{--pdf mygtukas--}}
+        <th>
+            <a class="btn btn-dark" href="{{route('type.pdf')}}"> Export All Types List to PDF </a>
+        </th>
+
         {{--OWNER MYGTUKAS--}}
         <th>
             <form method="GET" action="{{route('owner.index') }}">
@@ -133,7 +138,7 @@
             </tr>
         @endforeach
 
-                <a class="btn btn-success" href="{{route('type.pdf')}}"> Export All Types List to PDF </a>
+
     </table>
 
                 {!! $types->appends(Request::except('page'))->render() !!}

@@ -20,6 +20,13 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
+
+        $taskTitle = $request->taskTitle; // pavadinimas
+        $taskType = $request->taskType; //pagal autoriu
+
+        $filterTasks = Task::all();
+        $types = Type::all();
+
         $collumnName=$request->collumnname;
         $sortby=$request->sortby;
 
@@ -32,7 +39,17 @@ class TaskController extends Controller
 
         $tasks=Task::orderBy( $collumnName, $sortby)->paginate(5);
 
-        return view('task.index', ['tasks'=>$tasks, 'collumnName'=>$collumnName, 'sortby'=>$sortby]);
+        if($taskTitle) {
+            //vykdoma filtracija sortable()
+            $tasks = Task::sortable()->where('title', $taskTitle)->paginate(10); //sortable()
+        } else if ($taskType) {
+            $tasks = Task::sortable()->where('type_id', $taskType)->paginate(10); //sortable()
+        }
+        else {
+            $tasks = Task::sortable()->paginate(10); //sortable()
+        }
+
+        return view('task.index', ['tasks'=>$tasks, 'types'=>$types, 'filterTasks'=>$filterTasks,'collumnName'=>$collumnName, 'sortby'=>$sortby]);
     }
 
     /**
@@ -208,5 +225,28 @@ class TaskController extends Controller
         return $pdf->download("tasks.pdf");
 
     }
+
+    public function generateStatisticsPdf()
+    {
+        // suskaiciuoja visus Task
+        $tasks=Task::all();
+        $tasksCount=$tasks->count();
+
+        // suskaiciuoja visus Type
+        $types=Type::all();
+        $typesCount=$types->count();
+        // suskaiciuoja visus Owner
+        $owners=Owner::all();
+        $ownersCount=$owners->count();
+
+
+        // i vaizda (PDF faila) perduodami visi tipai, visos uzduotys, visi owner. tiek kiek yra, kiek suskaiciavo
+        view()->share(["tasksCount" => $tasksCount, 'typesCount' => $typesCount, 'ownersCount' => $ownersCount]);
+        // svarbus template pavadinimas
+        $pdf=PDF::loadView('pdf_template');
+
+        return $pdf->download("statistics.pdf");
+}
+
 
 }

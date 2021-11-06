@@ -32,7 +32,7 @@
                             <div class="form-group row">
                                 <label for="type_title" class="col-md-4 col-form-label text-md-right">{{ __('Type title') }}</label>
                                 <div class="col-md-6">
-                                    <input id="title"type="text" class="form-control @error('title') is-invalid @enderror " value="{{ old('title') }}" name="title" autofocus>
+                                    <input id="title"type="text" class="form-control @error('title') is-invalid @enderror " value="{{$type->title}}" name="title" autofocus>
                                     @error('title')
                                         <span role="alert" class="invalid-feedback">
                                             <strong>*{{$message}}</strong>
@@ -45,7 +45,7 @@
                             <div class="form-group row">
                                 <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Type description') }}</label>
                                 <div class="col-md-6">
-                                    <textarea class="form- control summernote" name="description" required>
+                                    <textarea class="form- control summernote" value="{{$type->description}}" name="description" required>
                                     </textarea>
                                     @error('description')
                                             <span role="alert" class="invalid-feedback">

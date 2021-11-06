@@ -31,7 +31,7 @@
                             <div class="form-group row">
                                 <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Task title') }}</label>
                                 <div class="col-md-6">
-                                    <input id="title"type="text" class="form-control @error('title') is-invalid @enderror " value="{{ old('title') }}" name="title" autofocus>
+                                    <input id="title"type="text" class="form-control @error('title') is-invalid @enderror " value="{{$task->title}}" name="title" autofocus>
                                         @error('title')
                                         <span role="alert" class="invalid-feedback">
                                             <strong>*{{$message}}</strong>

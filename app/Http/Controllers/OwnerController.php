@@ -60,6 +60,8 @@ class OwnerController extends Controller
             //'phone'=>'required',
             'phone'=>'required|regex:/^(\+\d{1,3}[- ]?)?\d{9}$/',
             //'phone'=>'required|regex:(86|\+3706) \d{3} \d{4}|max:9',
+            'created_at' => 'required|date', //required|date|before:end_date
+            'updated_at' => 'required|date|after:created_at', // PABAIGOS DATA- VELIAU UZ PR.
         ]);
 
         //duomenu bazes lenteles pavadinimas = input/select/texarea laukeliu pavadinimas
@@ -115,6 +117,8 @@ class OwnerController extends Controller
             'phone'=>'required|regex:/^(\+\d{1,3}[- ]?)?\d{9}$/',
             //'phone'=> '(86|\+3706) \d{3} \d{4}',
             //'phone'=>'required|regex:(86|\+3706) \d{3} \d{4}|max:9',
+            'created_at' => 'required|date', //required|date|before:end_date
+            'updated_at' => 'required|date|after:created_at', // PABAIGOS DATA- VELIAU UZ PR.
         ]);
 
 

@@ -30,6 +30,7 @@ Route::get('/', function () {
         Route::get('show/{task}','TaskController@show')->name('task.show')->middleware("auth");
         Route::get('/pdf', 'TaskController@generatePDF')->name('task.pdf');
         Route::get('pdfTask/{task}', 'TaskController@generateTaskPDF')->name('task.pdftask');
+        Route::get('generateStatistics','TaskController@generateStatisticsPDF')->name('task.generatestatistics');
         });
 
     Route::prefix('types')->group(function () {

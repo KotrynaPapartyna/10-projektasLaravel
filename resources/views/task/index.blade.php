@@ -35,6 +35,16 @@
                 </form>
             </th>
 
+        {{--pdf mygtukas--}}
+            <th>
+                <a class="btn btn-dark" href="{{route('task.pdf')}}"> Export All Tasks List to PDF </a>
+            <th>
+
+            <th>
+                <a href="{{route('task.generatestatistics')}}" class="btn btn-success">
+                    EXPORT STATISTICS
+                </a>
+            <th>
 
         {{--OWNER MYGTUKAS--}}
             <th>
@@ -60,6 +70,25 @@
                     <button type="submit">SEARCH</button>
                 </form>
             </th>
+
+        {{--filtravimo mygtukas--}}
+        <th>
+            <form method="GET" action="{{route('task.index')}}">
+                    @csrf
+                    <select name="taskType">
+                        @foreach ($types as $type)
+                            <option value="{{$type->id}}">{{$type->title}}</option>
+                        @endforeach
+                    </select>
+
+                    <button type="submit">Filter</button>
+            </form>
+        </th>
+
+        <th>
+            <a href="{{route('task.index')}}" class="btn btn-info">Clear Filter</a>
+        </th>
+
         </tr>
     </table>
 
@@ -154,12 +183,9 @@
 
         @endforeach
 
-                <a class="btn btn-success" href="{{route('task.pdf')}}"> Export All Tasks List to PDF </a>
-            </table>
+    </table>
 
-
-
-                {!! $tasks->appends(Request::except('page'))->render() !!}
+               {!! $tasks->appends(Request::except('page'))->render() !!}
             </div>
         </div>
     </div>
